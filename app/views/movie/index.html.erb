@@ -1,0 +1,23 @@
+<h1>Rotten Mangoes</h1>
+  <%= link_to "Submit a movie!", new_movie_path %>
+  <hr>
+  <% @movies.each do |movie| %>
+    <%= link_to image_tag(movie.poster_image_url), movie_path(movie) %>
+    <h2><%= link_to movie.title, movie_path(movie) %></h2>
+    <h3><%= movie.release_date %></h3>
+    <h4>Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes</h4>
+    <p><%= movie.description %></p>
+    <hr>
+  <% end %>
+
+<!-- <h1>Rotten Mangoes</h1>
+<hr>
+<%= link_to "Create a Moive!", new_movie_path %>
+<hr>
+<% @movies.each do |movie| %>
+  <h2><%= link_to movie.title, movie_path(movie) %></h2>
+  <p><%= movie.description %></p>
+  <p><%= movie.runtime_in_minutes %></p>
+  <p><%= movie.release_date %></p>
+  <small>- <%= movie.director %></small>
+<% end %> -->

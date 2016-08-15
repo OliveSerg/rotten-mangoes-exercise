@@ -1,0 +1,11 @@
+<h1>Rotten Mangoes</h1>
+<hr>
+<%= link_to "Create a Moive!", new_movie_path %>
+<hr>
+<% @movies.each do |movie| %>
+  <h2><%= link_to movie.title, movie_path(movie) %></h2>
+  <p><%= movie.description %></p>
+  <p><%= movie.runtime_in_minutes %></p>
+  <p><%= movie.release_date %></p>
+  <small>- <%= movie.director %></small>
+<% end %>
