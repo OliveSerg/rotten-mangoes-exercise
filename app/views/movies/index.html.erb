@@ -6,6 +6,12 @@
   <h2><%= link_to movie.title, movie_path(movie) %></h2>
   <p><%= movie.description %></p>
   <p><%= movie.runtime_in_minutes %></p>
-  <p><%= movie.release_date %></p>
+  <p><%= formatted_date(movie.release_date) %></p>
   <small>- <%= movie.director %></small>
+  <p><%= movie.review_average %>/10</p>
+<% end %>
+<% form_tag, movie_path do %>
+  <%= radio_button(:sort, "title"), %>
+  <%= radio_button(:sort, "release_date, DESC"), %>
+  <%= radio_button(:sort, "reviews"), %>
 <% end %>
