@@ -12,4 +12,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def check_admin
+    unless @current_user && @current_user.admin?
+      redirect_to login_path, notice: "You must be an admin, sneaky bastard!"
+    end
+  end
+
 end

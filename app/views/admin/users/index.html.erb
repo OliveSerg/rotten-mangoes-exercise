@@ -1,0 +1,10 @@
+<p>
+  Admin: <%= @admin_user.full_name%>
+</p>
+
+
+<% @users.each do |user| %>
+  <%= user.full_name %>
+  <%= link_to 'Show', "#" %>
+  <%= link_to 'Edit', "#" %>
+<% end %>
