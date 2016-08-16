@@ -3,7 +3,7 @@ class Movie < ApplicationRecord
   has_many :reviews
   has_many :actors, :through => :actors_movies
 
-  validates :title, :director, :description, :poster_image_url, :release_date, :categories
+  validates :title, :director, :description, :poster_image_url, :release_date, :categories,
     presence: true
 
   validates :runtime_in_minutes,
