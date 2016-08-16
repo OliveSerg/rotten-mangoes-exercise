@@ -11,7 +11,7 @@ user1 = User.create(email: 'sergio@example.com', password: '12345', firstname: '
 user2 = User.create(email: 'example@example.com', password: '12345', firstname: 'Leroy', lastname: 'Jenkins')
 
 5.times do
-  movie = Movie.new(
+  movie = Movie.create(
     title: Faker::Book.title,
     director: Faker::Book.author,
     runtime_in_minutes: Faker::Number.number(3),
@@ -22,9 +22,11 @@ user2 = User.create(email: 'example@example.com', password: '12345', firstname: 
   )
 
   review = Review.create(
-  user_id: user2.id,
-  movie_id: movie.id,
-  text: Faker::Hipster.paragraph,
-  rating_out_of_ten: Faker::Number.between(0,10),
+    user_id: user2.id,
+    movie_id: movie.id,
+    text: Faker::Hipster.paragraph,
+    rating_out_of_ten: Faker::Number.between(0,10),
   )
+
+  puts movie.reviews.sum(:rating_out_of_ten)/movie.reviews.size
 end
