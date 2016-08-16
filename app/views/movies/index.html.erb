@@ -10,7 +10,7 @@
   <small>- <%= movie.director %></small>
   <p><%= movie.review_average %>/10</p>
 <% end %>
-<% form_tag(controler: "movies", action: "index", method: "get") do %>
+<% form_tag( action: :index, method: "get") do %>
   <%= label_tag "title"%>
   <%= radio_button_tag(:sort, "title") %>
   <%= radio_button_tag(:sort, "release_date, DESC") %>
