@@ -2,9 +2,17 @@
 <hr>
 <%= link_to "Create a Moive!", new_movie_path %>
 <hr>
-<%= form_tag search_movies_path, method: 'get' do %>
+<!-- <%= form_tag search_movies_path, method: 'get' do %>
   <%= search_field(:search, :attr, placeholder: "Search by") %>
   <%= select_tag(:search_options, options_for_select([["Title", :title], ["Director", :director], ["Duration", :duration]])) %>
+  <%= submit_tag "Search" %>
+<% end %> -->
+<%= form_tag search_movies_path, method: 'get' do %>
+  <%= search_field(:title, :attr, placeholder: "Title") %>
+  <%= search_field(:director, :attr, placeholder: "Director") %>
+  <%= select_tag(:duration_option, options_for_select([
+    ["Less than 90minutes", :under_90],
+    ["Between 90min and 120min", :between_90_120], ["Over 120min", :over_120]])) %>
   <%= submit_tag "Search" %>
 <% end %>
 <hr>

@@ -45,17 +45,26 @@ class MoviesController < ApplicationController
    end
 
    def search
-     option = params[:search_options]
-     binding.pry
-     case option
-     when :title
-       @movies = Movie.where("title LIKE ?", params[:search])
-     when :director
-       @movies = Movie.where(director: params[:search])
-     when :duration
-       @movies = Movie.where("runtime_in_minutes <= ?", params[:search] )
-     end
+     title = params[:title]
+     director = params[:director]
+     duration = params[:duration_option]
+     @movies = Movie.search_title(title)
+     @movies = @movies.search_director(director) || Movie.search_director(director)
+     @movies = @movies.search_duration(duration) || Movie.search_duration(duration)
    end
+
+  #  def search
+  #    option = params[:search_options]
+  #    binding.pry
+  #    case option
+  #    when :title
+  #      @movies = Movie.where("title LIKE ?", params[:search])
+  #    when :director
+  #      @movies = Movie.where(director: params[:search])
+  #    when :duration
+  #      @movies = Movie.where("runtime_in_minutes <= ?", params[:search] )
+  #    end
+  #  end
 
    protected
 
