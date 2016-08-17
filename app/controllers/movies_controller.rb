@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   before_action :current_user
-  
+
    def index
     sort = params[:sort] || :release_date
     @movies = Movie.order(sort)
@@ -42,6 +42,19 @@ class MoviesController < ApplicationController
      @movie = Movie.find(params[:id])
      @movie.destroy
      redirect_to movies_path
+   end
+
+   def search
+     option = params[:search_options]
+     binding.pry
+     case option
+     when :title
+       @movies = Movie.where("title LIKE ?", params[:search])
+     when :director
+       @movies = Movie.where(director: params[:search])
+     when :duration
+       @movies = Movie.where("runtime_in_minutes <= ?", params[:search] )
+     end
    end
 
    protected
