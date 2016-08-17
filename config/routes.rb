@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   root to: "movies#index"
 
   resources :users, only: [:new, :create]
-  resources :sessions, only: [:new, :create, :destroy]
+  resource :session, only: [:new, :create, :destroy]
 
   namespace :admin do
     resources :users
