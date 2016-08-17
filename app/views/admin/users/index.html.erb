@@ -1,10 +1,31 @@
 <p>
-  Admin: <%= @admin_user.full_name%>
+  Admin: <%= @current_user.full_name%>
 </p>
 
+<p>
+  <%= link_to "Create User", new_admin_user_path%>
+</p>
 
-<% @users.each do |user| %>
-  <%= user.full_name %>
-  <%= link_to 'Show', "#" %>
-  <%= link_to 'Edit', "#" %>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Created</th>
+      <th>Admin</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.full_name, admin_user_path(user)%></td>
+        <td><%= user.email %></td>
+        <td><%= formatted_date(user.created_at)%></td>
+        <td><%= user.admin%></td>
+        <td><%= link_to 'Edit', "#" %></td>
+        <td><%= link_to 'Delete', admin_users_path, method: :destroy, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

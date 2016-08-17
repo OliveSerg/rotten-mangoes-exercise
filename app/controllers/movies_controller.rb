@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
-
+  before_action :current_user
+  
    def index
     sort = params[:sort] || :release_date
     @movies = Movie.order(sort)

@@ -13,8 +13,9 @@ class ApplicationController < ActionController::Base
   end
 
   def check_admin
+    current_user
     unless @current_user && @current_user.admin?
-      redirect_to login_path, notice: "You must be an admin, sneaky bastard!"
+      redirect_to new_session_path, notice: "You must be an admin to gain access"
     end
   end
 

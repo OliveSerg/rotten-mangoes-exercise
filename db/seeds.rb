@@ -25,7 +25,7 @@ user2 = User.create(email: 'example@example.com', password: '12345', firstname: 
     user_id: user2.id,
     movie_id: movie.id,
     text: Faker::Hipster.paragraph,
-    rating_out_of_ten: Faker::Number.between(0,10),
+    rating_out_of_ten: Faker::Number.between(1,10),
   )
 
   puts movie.reviews.sum(:rating_out_of_ten)/movie.reviews.size
