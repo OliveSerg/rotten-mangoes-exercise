@@ -45,9 +45,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
+    user = User.find(params[:id])
+    user.destroy
     respond_to do |format|
-      format.html { redirect_to admin_users, notice: 'User was successfully destroyed.' }
+      UserMailer.deleted_message(user).deliver_later
+      format.html { redirect_to admin_users_path, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
