@@ -5,3 +5,28 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user1 = User.create(email: 'sergio@example.com', password: '12345', firstname: 'Sergio', lastname: 'Oliveira', admin: true)
+
+user2 = User.create(email: 'example@example.com', password: '12345', firstname: 'Leroy', lastname: 'Jenkins')
+
+5.times do
+  movie = Movie.create(
+    title: Faker::Book.title,
+    director: Faker::Book.author,
+    runtime_in_minutes: Faker::Number.number(3),
+    description: Faker::Hipster.paragraph,
+    release_date: Faker::Date.backward(1000000),
+    catagories: Faker::Book.genre,
+    image: Faker::Avatar.image
+  )
+
+  review = Review.create(
+    user_id: user2.id,
+    movie_id: movie.id,
+    text: Faker::Hipster.paragraph,
+    rating_out_of_ten: Faker::Number.between(1,10),
+  )
+
+  puts movie.reviews.sum(:rating_out_of_ten)/movie.reviews.size
+end

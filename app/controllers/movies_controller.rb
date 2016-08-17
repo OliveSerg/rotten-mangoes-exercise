@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
-
+  before_action :current_user
+  
    def index
     sort = params[:sort] || :release_date
     @movies = Movie.order(sort)
@@ -47,7 +48,7 @@ class MoviesController < ApplicationController
 
    def movie_params
      params.require(:movie).permit(
-       :title, :release_date, :director, :runtime_in_minutes, :poster_image_url, :description, :catagories
+       :title, :release_date, :director, :runtime_in_minutes, :image, :poster_image_url, :description, :catagories
      )
    end
 
