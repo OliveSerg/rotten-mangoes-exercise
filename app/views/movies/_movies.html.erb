@@ -1,12 +1,11 @@
 <h2><%= link_to movie.title, movie_path(movie) %></h2>
-<% if current_user.admin %>
+<%= image_tag(movie.image_url.to_s) %>
+<h2><%= movie.title %></h2>
+<% if current_user.try(:admin) %>
   <%= link_to "Edit", edit_movie_path(movie)%>
   <%= link_to "Delete", movie_path(movie), method:"delete", data: {confirm: "Are you sure you want delete #{movie.title}?"}%>
 <% end %>
-<div><%= image_tag movie.image_url.to_s %></div>
-<p><%= movie.description %></p>
-<p><%= movie.runtime_in_minutes %></p>
-<p><%= formatted_date(movie.release_date) %></p>
-<small>- <%= movie.director %></small>
+<h3><%= formatted_date(movie.release_date) %></h3>
+<h4>Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes</h4>
 <p><%= movie.review_average %>/10</p>
-<hr>
+<p><%= movie.description %></p>

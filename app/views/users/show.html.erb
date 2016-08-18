@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+<div><%= link_to "Back to Movies", movies_path %></div>
+
+<h1><%= @user.full_name %></h1>
+<% if current_user.try(:id) == @user.try(:id) %>
+  <%= link_to "Edit", '#'%>
+  <%= link_to "Delete", '#'%>
+<% end %>
+<p><%= @user.email%></p>
+<p>Created: <%= formatted_date @user.created_at %></p>
+
+<h3>Reviews </h3>
+<% @user.reviews.each do |review| %>
+  <strong><%= review.movie.title %></strong><br/>
+  <p><%= review.text %></p>
+  <p><%= review.rating_out_of_ten %>/10</p>
+<% end %>

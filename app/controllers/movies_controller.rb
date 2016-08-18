@@ -44,9 +44,9 @@ class MoviesController < ApplicationController
    end
 
    def search
-     search = params[:search][:data]
-     @movies = Movie.where("title LIKE ?", "%#{search}%")
-     @movies += Movie.where("director LIKE ?", "%#{search}%")
+     @search = params[:search][:data]
+     @movies = Movie.where("title LIKE ?", "%#{@search}%")
+     @movies += Movie.where("director LIKE ?", "%#{@search}%")
      @movies = @movies.uniq
    end
 

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root to: "movies#index"
 
   resources :users, only: [:new, :create]
+  get "/profile/:id", to: 'users#show'
   resource :session, only: [:new, :create, :destroy]
 
   namespace :admin do

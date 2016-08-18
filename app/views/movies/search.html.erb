@@ -1,13 +1,12 @@
 <h2>Your Search Result</h2>
-
+<%= link_to "Back to all movies", movies_path %><br/>
 <hr>
-
-<% @movies.each do |movie| %>
-  <h2><%= link_to movie.title, movie_path(movie) %></h2>
-  <div><%= image_tag movie.image_url.to_s %></div>
-  <p><%= movie.description %></p>
-  <p><%= movie.runtime_in_minutes %></p>
-  <p><%= formatted_date(movie.release_date) %></p>
-  <small>- <%= movie.director %></small>
-  <p><%= movie.review_average %>/10</p>
+<% if @moviess %>
+  <% @movies.each do |movie| %>
+    <%= render 'movies', movie: movie %>
+  <% end %>
+<% else %>
+  <p>
+    No Movies found with title of director <%= @search %>
+  </p>
 <% end %>
