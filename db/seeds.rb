@@ -18,7 +18,7 @@ user2 = User.create(email: 'example@example.com', password: '12345', firstname: 
     description: Faker::Hipster.paragraph,
     release_date: Faker::Date.backward(1000000),
     catagories: Faker::Book.genre,
-    image: Faker::Avatar.image
+    remote_image_url: Faker::Avatar.image
   )
 
   review = Review.create(

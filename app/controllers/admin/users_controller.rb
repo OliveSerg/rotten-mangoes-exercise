@@ -24,7 +24,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @admin_user.save
-        format.html { redirect_to @admin_user, notice: 'User was successfully created.' }
+        format.html { redirect_to admin_user_path(@admin_user), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @admin_user }
       else
         format.html { render :new }
@@ -36,7 +36,7 @@ class Admin::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @admin_user.update(admin_user_params)
-        format.html { redirect_to @admin_user, notice: 'User was successfully updated.' }
+        format.html { redirect_to admin_user_path(@admin_user), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_user }
       else
         format.html { render :edit }
@@ -55,18 +55,12 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # def destroy
-  #   User.find(params[:id]).destroy
-  #   flash[:success] = "User deleted"
-  #   redirect_to users_url
-  # end
-
   private
     def set_admin_user
       @admin_user = User.find(params[:id])
     end
 
     def admin_user_params
-      params.fetch(:admin, {})
+      params.require(:user).permit(:email, :firstname, :lastname, :password, :password_confirmation, :admin)
     end
 end
