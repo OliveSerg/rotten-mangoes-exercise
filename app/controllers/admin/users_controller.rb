@@ -16,6 +16,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
+    @admin_user = User.find(params[:id])
   end
 
   def create
