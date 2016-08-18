@@ -30,7 +30,6 @@ class MoviesController < ApplicationController
 
    def update
      @movie = Movie.find(params[:id])
-
      if @movie.update_attributes(movie_params)
        redirect_to movie_path(@movie)
      else
@@ -45,16 +44,10 @@ class MoviesController < ApplicationController
    end
 
    def search
-     option = params[:search_options]
-     binding.pry
-     case option
-     when :title
-       @movies = Movie.where("title LIKE ?", params[:search])
-     when :director
-       @movies = Movie.where(director: params[:search])
-     when :duration
-       @movies = Movie.where("runtime_in_minutes <= ?", params[:search] )
-     end
+     search = params[:search][:data]
+     @movies = Movie.where("title LIKE ?", "%#{search}%")
+     @movies += Movie.where("director LIKE ?", "%#{search}%")
+     @movies = @movies.uniq
    end
 
    protected

@@ -3,17 +3,10 @@
 <%= link_to "Create a Moive!", new_movie_path %>
 <hr>
 <%= form_tag search_movies_path, method: 'get' do %>
-  <%= search_field(:search, :attr, placeholder: "Search by") %>
-  <%= select_tag(:search_options, options_for_select([["Title", :title], ["Director", :director], ["Duration", :duration]])) %>
+  <%= search_field(:search, :data, placeholder: "Search with Title or Director") %>
   <%= submit_tag "Search" %>
 <% end %>
 <hr>
 <% @movies.each do |movie| %>
-  <h2><%= link_to movie.title, movie_path(movie) %></h2>
-  <div><%= image_tag movie.image_url.to_s %></div>
-  <p><%= movie.description %></p>
-  <p><%= movie.runtime_in_minutes %></p>
-  <p><%= formatted_date(movie.release_date) %></p>
-  <small>- <%= movie.director %></small>
-  <p><%= movie.review_average %>/10</p>
+  <%= render partial: "movies", locals: {movie: movie} %>
 <% end %>
